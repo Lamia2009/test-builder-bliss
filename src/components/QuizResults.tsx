@@ -2,8 +2,9 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Trophy, RotateCcw, CheckCircle, XCircle, Star, BookOpen } from 'lucide-react';
+import { Trophy, RotateCcw, CheckCircle, XCircle, Star, BookOpen, Code2, Zap } from 'lucide-react';
 import { type Question } from '@/data/questions';
+import { TechDecorations } from './TechDecorations';
 
 interface QuizResultsProps {
   score: number;
@@ -41,21 +42,44 @@ export const QuizResults = ({ score, totalQuestions, userAnswers, questions, onR
   }, {} as Record<string, { correct: number; total: number }>);
 
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-8 px-4 relative">
+      <TechDecorations />
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Trophy className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+        <div className="text-center mb-8 animate-slide-up">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="relative">
+              <Trophy className="h-12 w-12 text-primary animate-tech-pulse" />
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full animate-pulse"></div>
+            </div>
+            <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               Resultats del Test
             </h1>
+            <div className="relative">
+              <Zap className="h-12 w-12 text-secondary animate-float" />
+            </div>
+          </div>
+          <div className="mt-4 flex justify-center gap-2">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
 
         {/* Score Card */}
-        <Card className="p-8 shadow-card-custom mb-8 text-center">
-          <div className="space-y-6">
+        <Card className="p-8 shadow-card-custom mb-8 text-center relative overflow-hidden animate-slide-up" 
+              style={{ animationDelay: '0.2s' }}>
+          {/* Tech decoration overlay */}
+          <div className="absolute top-0 right-0 w-40 h-40 opacity-5 pointer-events-none">
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <path d="M20 20 L80 20 L80 80 L20 80 Z M35 35 L65 35 L65 65 L35 65 Z" 
+                    fill="none" stroke="currentColor" strokeWidth="1" className="text-primary" />
+              <circle cx="50" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="1" className="text-accent" />
+            </svg>
+          </div>
+          
+          <div className="space-y-6 relative z-10">
             <div className="flex items-center justify-center mb-4">
               <GradeIcon className={`h-16 w-16 ${gradeInfo.color}`} />
             </div>
